@@ -1,0 +1,485 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f4f4;
+    color: #222;
+}
+
+/* NAVBAR */
+header {
+    width: 100%;
+    padding: 20px 60px;
+    background: #0f91c1;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}
+
+/* Logo container */
+.logo-container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Main ARASI text */
+.brand {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #000;
+    display: flex;
+    position: relative;
+}
+
+/* Custom A (triangle + V) */
+.logo-A {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    margin: 0 7px;
+}
+
+/* Blue triangle (top part of A) */
+.A-top {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-bottom: 28px solid #002b80;
+    display: block;
+    margin: 0;
+    z-index: 1; /* di belakang */
+}
+
+/* Smaller blue triangle (in front) */
+.A-top1 {
+    position: absolute;
+    top: 4px; /* sesuaikan agar muncul di depan dan sedikit turun */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 28px solid #0f91c1;
+    display: block;
+    margin: 0;
+    z-index: 2; /* di depan .A-top */
+}
+
+/* Red V shape */
+.A-bottom {
+    position: absolute;
+    bottom: 2px; /* sesuaikan agar menumpuk di depan */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 9px solid #e60000;
+    z-index: 3; /* muncul di depan .A-top1 (z-index:2) */
+}
+
+.A-bottom1 {
+    position: absolute;
+    bottom: 6px; /* sesuaikan agar menumpuk di depan */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid #0f91c1;
+    z-index: 4; /* muncul di depan .A-top1 (z-index:2) */
+}
+
+/* Subtitle (tagline) aligned to the right edge of .brand so it won't pass the final "i") */
+.subtitle {
+    font-size: 8px;            /* sesuaikan ukuran jika perlu */
+    letter-spacing: 0px;
+    margin-top: 0;
+    color: #111;
+    font-weight: 800;
+}
+
+nav a {
+    color: #fff;
+    margin-left: 12px;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-block;
+    background: rgba(255,255,255,0.08); /* kotak semi-transparan */
+    padding: 8px 14px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: background .18s ease, transform .12s ease, color .12s ease;
+}
+
+/* remove extra left margin on first link if needed */
+nav a:first-child { margin-left: 0; }
+
+nav a:hover {
+    background: rgba(255,255,255,0.22);
+    color: #0b203a;
+    transform: translateY(-3px);
+}
+
+/* aktif / current */
+nav a.active {
+    background: #ffffff;
+    color: #0b203a;
+    font-weight: 700;
+    box-shadow: 0 6px 14px rgba(11,32,58,0.15);
+}
+
+/* HERO SECTION */
+.hero {
+    height: 100vh;
+    /* expand shorthand into explicit props so we can fix attachment */
+    background-image: url('https://images.unsplash.com/photo-1596495577886-d920f1fb7238');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* buat background menetap saat di-scroll (desktop) */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40px;
+    text-align: center;
+    color: white;
+    position: relative;
+    z-index: 0;
+}
+
+/* fallback/performance: beberapa browser mobile mengabaikan background-attachment:fixed.
+   Untuk perangkat kecil biarkan jadi scroll agar tampilan lebih stabil. */
+@media (max-width: 768px) {
+  .hero { background-attachment: scroll; }
+}
+
+.hero-content h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: auto;
+    margin-bottom: 25px;
+}
+
+.btn {
+    display: inline-block;
+    background: #1e90ff;
+    padding: 12px 25px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: #1572d3;
+}
+
+/* SERVICES */
+.services {
+    padding: 80px 60px;
+    text-align: center;
+}
+
+.service-container {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.service-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.service-card h3 {
+    margin-bottom: 15px;
+    color: #0b203a;
+}
+
+/* ABOUT */
+.about {
+    padding: 80px 60px;
+    background: #fff;
+    text-align: center;
+}
+
+.about p {
+    max-width: 800px;
+    margin: 20px auto;
+    line-height: 1.7;
+}
+
+/* PROJECTS */
+.projects {
+    padding: 80px 60px;
+    text-align: center;
+}
+
+.project-grid {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.project-item {
+    background: #1e90ff;
+    padding: 50px;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* PARTNERS */
+.partners {
+    /* override sebelumnya: susun vertikal, tengah */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 60px 20px;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(15,145,193,0.03), transparent 60%);
+}
+
+/* Judul partners diletakkan di atas gambar */
+.partners h2 {
+    margin: 0;
+    font-size: 28px;
+    color: #0b203a;
+    font-weight: 700;
+}
+
+.partners-image {
+    width: 100px;
+    
+}
+
+/* Responsif: di layar kecil kurangi tinggi agar tidak mendominasi */
+@media (max-width: 768px) {
+    .partners { padding: 40px 14px; }
+    .partners h2 { font-size: 22px; }
+    .partners-image { height: clamp(160px, 30vh, 420px); border-radius: 8px; }
+}
+@media (max-width: 480px) {
+    .partners { padding: 28px 12px; }
+    .partners h2 { font-size: 18px; }
+    .partners-image { height: clamp(120px, 28vh, 360px); }
+}
+/* CONTACT */
+.contact {
+    padding: 80px 60px;
+    background: #fff;
+    text-align: center;
+}
+
+form {
+    max-width: 600px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input, textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea {
+    height: 150px;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+    padding: 20px;
+    text-align: center;
+    background: #0b203a;
+    color: white;
+    margin-top: 40px;
+}
+
+/* PARTNERS / LANDSCAPE IMAGE STYLING */
+.partners {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(180deg, rgba(15,145,193,0.03), transparent 60%);
+}
+.partners-wrap {
+    width: 100%;
+    max-width: 1000px; /* ubah sesuai kebutuhan */
+    margin: 0 auto;
+}
+.partners-image {
+    display: block;
+    width: 100%;          /* lebar kontainer */
+    max-width: 1000px;    /* batas lebar gambar */
+    height: 360px;        /* tinggi tetap (ganti sesuai kebutuhan) */
+    object-fit: contain;  /* contain agar tidak terpotong */
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(11,32,58,0.08);
+    background: #fff;
+    padding: 8px;
+}
+
+/* RESPONSIVE: general adjustments */
+@media (max-width: 1024px) {
+  header { padding: 18px 40px; }
+  .brand { font-size: 26px; }
+  .logo-A { width: 26px; height: 26px; margin: 0 6px; }
+  nav a { font-size: 15px; padding: 7px 12px; margin-left: 10px; }
+  .hero-content h1 { font-size: 36px; }
+  .hero-content p { font-size: 17px; max-width: 640px; }
+}
+
+/* TABLET: stack logo & nav, tighter spacing */
+@media (max-width: 768px) {
+  header {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 6px;
+    padding: 14px 22px;
+    align-items: center;
+  }
+
+  /* logo block centered */
+  .logo-container { justify-self: start; }
+
+  /* brand smaller, subtitle positioned relative under brand */
+  .brand { font-size: 22px; }
+  .subtitle {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    max-width: 100%;
+    text-align: left;
+  }
+
+  /* nav becomes centered row, allow wrap */
+  nav {
+    grid-row: 2;
+    grid-column: 1;
+    justify-self: center;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  nav a {
+    padding: 8px 10px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+
+  .hero-content h1 { font-size: 32px; }
+  .hero-content p { font-size: 16px; max-width: 520px; }
+
+  .service-container,
+  .project-grid { gap: 18px; }
+}
+
+/* MOBILE: single-column, larger touch targets */
+@media (max-width: 480px) {
+  header { padding: 12px 14px; }
+
+  /* center logo container on phones */
+  .logo-container {
+    justify-self: center;   /* centers inside header grid */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .brand {
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  .logo-A { width: 22px; height: 22px; margin: 0 6px; }
+
+  .subtitle {
+    font-size: 10px;
+    margin-top: 2px;
+    display: block;
+    text-align: center;
+    position: relative;
+    left: 0;
+    transform: none;
+  }
+
+  nav {
+    justify-self: center;
+    gap: 6px;
+    padding-top: 6px;
+  }
+
+  nav a {
+    padding: 10px 12px;
+    font-size: 14px;
+    margin-left: 0;
+    background: rgba(255,255,255,0.09);
+  }
+
+  .hero { padding: 0 20px; }
+  .hero-content h1 { font-size: 26px; }
+  .hero-content p { font-size: 15px; max-width: 360px; }
+
+  .service-container,
+  .project-grid { grid-template-columns: 1fr; }
+
+  .service-card,
+  .project-item { padding: 20px; }
+
+  form { padding: 0 12px; }
+  input, textarea { font-size: 14px; }
+  .btn { padding: 12px 18px; }
+}
+
+/* small refinements to keep subtitle from overflowing ARASI right edge */
+.brand { position: relative; }
+.subtitle { pointer-events: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
